@@ -1,0 +1,15 @@
+from fgm.material_properties import fgm_properties, nondim_frequency
+
+# Propriétés à une position z dans l'épaisseur
+z = 0.005  # Position (m)
+h = 0.01   # Épaisseur (m)
+n = 1.0    # Indice de gradient
+
+props = fgm_properties(z, h, n, ceramic="Al2O3", metal="Al")
+print(f"Module d'Young : {props['E']:.2e} Pa")
+print(f"Coefficient de Poisson : {props['nu']}")
+print(f"Densité : {props['rho']:.2f} kg/m³")
+
+# Fréquence naturelle non-dimensionnelle
+omega = nondim_frequency(a=0.1, h=0.01, n=1.0)
+print(f"Fréquence non-dimensionnelle : {omega:.4f}")
