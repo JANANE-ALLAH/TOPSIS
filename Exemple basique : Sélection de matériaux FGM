@@ -1,0 +1,30 @@
+from optimization.topsis import TOPSIS
+import numpy as np
+
+# Alternatives (matériaux composites)
+alternatives = ["Al2O3/Al", "ZrO2/Al", "Si3N4/SUS304", "Al2O3/Ti", "ZrO2/Ti"]
+
+# Matrice de décision (alternatives × critères)
+M = np.array([
+    [5.12, 38.2,  6.25, 225.0],
+    [4.87, 36.5,  8.25, 135.0],
+    [6.21, 58.1,  6.30, 265.1],
+    [5.48, 42.3,  5.57, 213.9],
+    [5.09, 38.9,  5.06, 152.9]
+])
+
+# Poids des critères (doit sommer à 1.0)
+weights = np.array([0.35, 0.30, 0.20, 0.15])
+
+# Types de critères : "benefit" (à maximiser) ou "cost" (à minimiser)
+criteria_types = ["benefit", "benefit", "cost", "benefit"]
+
+# Créer et calculer TOPSIS
+topsis = TOPSIS(M, weights, criteria_types, alternatives)
+scores = topsis.compute()
+
+# Afficher le résumé et le classement
+topsis.summary()
+
+# Visualiser les résultats
+topsis.plot("Selection de materiaux FGM - TOPSIS")
